@@ -21,8 +21,8 @@ def main():
                        help='number of characters to sample')
     parser.add_argument('--prime', type=str, default=' ',
                        help='prime text')
-    parser.add_argument('--beam_width', type=int, default=2,
-                       help='Width of the beam for beam search, default 2')
+    parser.add_argument('--beam_width', type=int, default=3,
+                       help='Width of the beam for beam search, default 3')
     parser.add_argument('--temperature', type=float, default=1.0,
                        help='sampling temperature'
                        '(lower is more conservative, default is 1.0, which is neutral)')
@@ -128,6 +128,7 @@ def chatbot(net, sess, chars, vocab, max_length, beam_width, relevance, temperat
     states = initial_state_with_relevance_masking(net, sess, relevance)
     while True:
         user_input = sanitize_text(vocab, raw_input('\n> '))
+
         user_command_entered, reset, states, relevance, temperature, beam_width = process_user_command(
             user_input, states, relevance, temperature, beam_width)
         if reset: states = initial_state_with_relevance_masking(net, sess, relevance)
@@ -137,12 +138,21 @@ def chatbot(net, sess, chars, vocab, max_length, beam_width, relevance, temperat
             initial_state=copy.deepcopy(states), initial_sample=vocab[' '],
             early_term_token=vocab['\n'], beam_width=beam_width, forward_model_fn=forward_with_mask,
             forward_args=(relevance, vocab['\n']), temperature=temperature)
+        infile = open("input.txt", "w")
+        infile.write("")
+        infile.close()
+        textOut = "" 
+
         for i, char_token in enumerate(computer_response_generator):
             print(chars[char_token], end='')
+            textOut = textOut + chars[char_token];
             states = forward_text(net, sess, states, vocab, chars[char_token])
             sys.stdout.flush()
             if i >= max_length: break
         states = forward_text(net, sess, states, vocab, '\n> ')
+        file = open("response.txt", "w")
+        file.write(textOut)
+        file.close()
 
 def process_user_command(user_input, states, relevance, temperature, beam_width):
     user_command_entered = False

@@ -21,13 +21,13 @@ def main():
                        help='number of layers in the RNN')
     parser.add_argument('--model', type=str, default='gru',
                        help='rnn, gru, or lstm')
-    parser.add_argument('--batch_size', type=int, default=40,
+    parser.add_argument('--batch_size', type=int, default=1,
                        help='minibatch size')
     parser.add_argument('--seq_length', type=int, default=50,
                        help='RNN sequence length')
     parser.add_argument('--num_epochs', type=int, default=50,
                        help='number of epochs')
-    parser.add_argument('--save_every', type=int, default=1000,
+    parser.add_argument('--save_every', type=int, default=10,
                        help='save frequency')
     parser.add_argument('--grad_clip', type=float, default=5.,
                        help='clip gradients at this value')
