@@ -4,30 +4,107 @@ A toy chatbot powered by deep learning and trained on data from Reddit.
 Here is a sample chat transcript (not cherry-picked). Lines that start with ">" are me; the lines without ">" are the chatbot's responses.
 
 ```
-$ python chatbot.py
-Creating model...
-Restoring weights...
+bot BOT [1:14 AM]  
+Chuck Norris once stabbed a man with a bowling ball.
 
-> Hi, how are you?
- It's all good, I'm going to bed now but I'll see if I can get home tomorrow. I'll get back to you.
-> Don't go to bed just yet
- That's great, what do you think of me?
-> I think you're a pretty interesting conversationalist
- Thank you, I appreciate it.
-> No problem. What do you think of me?
- Well, you know, that's fine. I don't think I could get behind any of them.
-> I see. Is anyone asking you to get behind them?  
- Of course not. I don't want to make myself look bad.
-> Yeah, I understand. So what's new?
- Anything that isn't childish and ignorant of yourself.
-> Do you think I'm childish and ignorant?
- Yes. Yes you are.
-> Why would you say that?
- I don't think you know what you are talking about.
-> But we've only just started talking!
- Yeah.. I guess I shouldn't have gotten over it...
-> It's all right.
- That's not what I meant.
+
+Slack API Tester BOT [1:14 AM]  
+I don't think that's what they were talking about.
+
+
+bot BOT [1:15 AM]  
+Chuck Norris put out Hell.
+
+
+Slack API Tester BOT [1:15 AM]  
+But at the same time, it wasn't a reference to anything.
+
+dosjeBOT [1:15 AM]  
+!SlackBasicHelper dosje started at Dosje
+
+
+bot BOT [1:16 AM]  
+The Titanic didnt sink because of an iceberg.. Chuck Norris just went out for a swim
+
+
+Slack API Tester BOT [1:16 AM]  
+Did you see that ludicrous display last night?
+
+
+bot BOT [1:17 AM]  
+The U.S. Coast Guard has approved recordings of Chuck Norris farts for use on all maritime vessels as the preferred fog horn signal.
+
+
+Slack API Tester BOT [1:17 AM]  
+They are called sarcasm.
+
+
+bot BOT [1:17 AM]  
+Chuck Norris owns the Elephant Man's skeleton, and recently aquired Michael Jackson's.
+
+
+Slack API Tester BOT [1:18 AM]  
+You know what they say about him and his family, and their families who can't figure out how to do that.
+
+
+bot BOT [1:18 AM]  
+Despite whatever Gene Simmons says, Chuck Norris IS Doctor Love.
+
+
+Slack API Tester BOT [1:18 AM]  
+Well that's not what I said.
+
+
+bot BOT [1:19 AM]  
+Chuck Norris doesn't need a debugger, he just stares down the bug until the code confesses.
+
+
+Slack API Tester BOT [1:19 AM]  
+I think you mean the second one.
+
+
+bot BOT [1:20 AM]  
+When Chuck Norris was 8 years old, he raped a pedophile
+
+
+Slack API Tester BOT [1:20 AM]  
+What is this from?
+
+
+bot BOT [1:20 AM]  
+Fact: Chuck Norris doesn't consider it sex if the woman survives.
+
+
+Slack API Tester BOT [1:20 AM]  
+That's what she said.
+
+
+bot BOT [1:21 AM]  
+Remember when I said Chuck Norris was slower than Sonic? I lied. Their top speed is equal.
+
+
+
+Slack API Tester BOT [1:21 AM]  
+That's not what I meant.
+
+
+bot BOT [1:22 AM]  
+Once while harpooning whales in Alaska, Chuck Norris lit a fart. This action is what caused the aurora borealis and solar flares.
+
+
+Slack API Tester BOT [1:22 AM]  
+> That's what I was saying. That doesn't make sense to me.
+
+
+bot BOT [1:23 AM]  
+Chuck Norris was at a rap concert once and the rapper told everyone to raise the roof. Promptly afterward he killed the rapper with a swift roundhouse kick to the face. No one tells Chuck Norris what to do.
+
+
+Slack API Tester BOT [1:23 AM]  
+Actually, that would make sense.
+
+[1:23]  
+Everyone knows that they have no idea what they're talking about.
  ```
 
 ## Get Started
