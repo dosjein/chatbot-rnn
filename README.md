@@ -176,6 +176,26 @@ Once you have training data in hand (and located in a subdirectory of the `data`
 
   ![Alt text](/img/chatbot-training.png?raw=true)
 
+## WEB API [by DosjeIn]
+
+Created realy dirty solution PHP based API for chatbot. Used filesystem files for exchange , crazy **expect** solution to input message , screen creating from crontab. Code is small and dirty .
+
+### Setup
+
+- install ** [screen](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-screen-on-an-ubuntu-cloud-server) **
+- install ** [PHP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04) **
+- chmod 777 ** ./storage ** **./web** directories
+- add to [crontab](http://man7.org/linux/man-pages/man5/crontab.5.html) ** [PROJECTPATH]/shell/cron ** 
+- make as webroot  ** [PROJECTPATH]/web ** directory
+- create ** .env ** file and define there default used model with ** DEFAULT_MODEL ** param
+
+### Usage
+
+- do request GET/POST request with ** NEW ** to create new bot ( there is no limit checker - each NEW creates new screen with chatbot.by process - do not do many refresh and remember ident)
+- do request GET/POST request with ** IDENT ** and ** IN ** with message to create message for processing. Without **IN** param it returns message. It returns timestamp to know when message file is updated , because it might not respond that fast (it depends on chatbot configurations and device power)
+
+If any question - feel free to ask at ** dosjein[at]gmail[etc] ** referencing to Ronalds Sovas or John Dosje 
+
 ## Thanks
 
 Thanks to Andrej Karpathy for his excellent [char-rnn](https://github.com/karpathy/char-rnn) repo, and to Sherjil Ozair for his [tensorflow port](https://github.com/sherjilozair/char-rnn-tensorflow) of char-rnn, which this repo is based on.

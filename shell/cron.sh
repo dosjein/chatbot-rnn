@@ -1,6 +1,8 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
+echo $(pwd)
+
 eval $(cat ../.env | sed 's/^/export /')
 
 if [ -d "../storage/php_request" ]; then
@@ -12,7 +14,7 @@ if [ -d "../storage/php_request" ]; then
 
             if [ -f "$FILE_model.def" ];
             then
-               model=$( cat "$FILE_model.def" )
+               model=$( cat "$FILE_model.def" | tr '\n' '')
             else
                model=$DEFAULT_MODEL
             fi
