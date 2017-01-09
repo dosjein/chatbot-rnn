@@ -9,6 +9,7 @@ import cPickle
 import copy
 import sys
 import string
+import datetime
 
 from utils import TextLoader
 from model import Model
@@ -17,6 +18,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--save_dir', type=str, default='models/reddit',
                        help='model directory to store checkpointed models')
+    parser.add_argument('--transcript', type=str, default="storage/transcript_"+datetime.datetime.utcnow().strftime('%B%d%Y')+".txt",
+                       help='transcript file name')
+    parser.add_argument('--external', type=str, default="storage/default",
+                       help='transcript file name')  
     parser.add_argument('-n', type=int, default=500,
                        help='number of characters to sample')
     parser.add_argument('--prime', type=str, default=' ',
@@ -69,10 +74,14 @@ def sample_main(args):
     with tf.Session(config=config) as sess:
         tf.initialize_all_variables().run()
         saver = tf.train.Saver(net.save_variables_list())
-        # Restore the saved variables, replacing the initialized values.
-        print("Restoring weights...")
+        print("Restoring weights..." +  model_path)
+        print("Transcript in " +  args.transcript)
+        file = open(args.transcript, "a")
+        file.write('\n\n\n!!!Starting '+  model_path +' at '+datetime.datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')+'\n')
+        file.close()
+
         saver.restore(sess, model_path)
-        chatbot(net, sess, chars, vocab, args.n, args.beam_width, args.relevance, args.temperature)
+        chatbot(net, sess, chars, vocab, args.n, args.beam_width, args.relevance, args.temperature , args.transcript, args.external)
         #beam_sample(net, sess, chars, vocab, args.n, args.prime,
             #args.beam_width, args.relevance, args.temperature)
 
@@ -124,7 +133,7 @@ def initial_state_with_relevance_masking(net, sess, relevance):
     if relevance <= 0.: return initial_state(net, sess)
     else: return [initial_state(net, sess), initial_state(net, sess)]
 
-def chatbot(net, sess, chars, vocab, max_length, beam_width, relevance, temperature):
+def chatbot(net, sess, chars, vocab, max_length, beam_width, relevance, temperature, transcript,external):
     states = initial_state_with_relevance_masking(net, sess, relevance)
     while True:
         user_input = sanitize_text(vocab, raw_input('\n> '))
@@ -138,7 +147,7 @@ def chatbot(net, sess, chars, vocab, max_length, beam_width, relevance, temperat
             initial_state=copy.deepcopy(states), initial_sample=vocab[' '],
             early_term_token=vocab['\n'], beam_width=beam_width, forward_model_fn=forward_with_mask,
             forward_args=(relevance, vocab['\n']), temperature=temperature)
-        infile = open("input.txt", "w")
+        infile = open(external+"_in.txt", "w")
         infile.write("")
         infile.close()
         textOut = "" 
@@ -150,9 +159,15 @@ def chatbot(net, sess, chars, vocab, max_length, beam_width, relevance, temperat
             sys.stdout.flush()
             if i >= max_length: break
         states = forward_text(net, sess, states, vocab, '\n> ')
-        file = open("response.txt", "w")
+        file = open(external+"_out.txt", "w")
         file.write(textOut)
         file.close()
+
+        mode = 'a' if os.path.exists(transcript) else 'w'
+        file = open(transcript, mode)
+        file.write('\nAnonymos['+datetime.datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')+']>' +user_input + '\nJohn Dosje['+datetime.datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')+']>' + textOut)
+        file.close()
+
 
 def process_user_command(user_input, states, relevance, temperature, beam_width):
     user_command_entered = False
