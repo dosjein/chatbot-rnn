@@ -1,3 +1,5 @@
 .env
 models/reddit/*
 models/new_save/*
+storage/*
+data/*
