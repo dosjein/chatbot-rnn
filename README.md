@@ -185,7 +185,7 @@ Created realy dirty solution PHP based API for chatbot. Used filesystem files fo
 - install **[screen](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-screen-on-an-ubuntu-cloud-server)**
 - install **[PHP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04)**
 - chmod 777 **./storage** **./web** directories
-- add to [crontab](http://man7.org/linux/man-pages/man5/crontab.5.html) **[PROJECTPATH]/shell/cron** 
+- add to [crontab](http://man7.org/linux/man-pages/man5/crontab.5.html) **[PROJECTPATH]/shell/cron.sh** 
 - make as webroot  **[PROJECTPATH]/web** directory
 - create **.env** file and define there default used model with **DEFAULT_MODEL** param
 
