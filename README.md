@@ -196,7 +196,7 @@ Created realy dirty solution PHP based API for chatbot. Used filesystem files fo
 
 If any question - feel free to ask at **dosjein[at]gmail[etc]** referencing to Ronalds Sovas or John Dosje 
 
-## [Tips and Tricks from karpathy](https://github.com/karpathy/char-rnn/blob/master/Readme.md#tips-and-tricks)
+## Tips and Tricks [from karpathy](https://github.com/karpathy/char-rnn/blob/master/Readme.md#tips-and-tricks)
 
 ### ToDo
 - need to add traning validator , that logs issues with Data size etc. Optional , but Nice2Have
