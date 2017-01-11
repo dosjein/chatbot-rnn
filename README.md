@@ -182,6 +182,7 @@ Created realy dirty solution PHP based API for chatbot. Used filesystem files fo
 
 ### Setup
 
+- install **[expect](https://launchpad.net/ubuntu/+source/expect)**
 - install **[screen](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-screen-on-an-ubuntu-cloud-server)**
 - install **[PHP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04)**
 - chmod 777 **./storage** **./web** directories
