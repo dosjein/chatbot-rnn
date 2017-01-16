@@ -11,7 +11,7 @@ from six.moves import cPickle
 from utils import TextLoader
 from model import Model
 
-save_dir = 'save'
+save_dir = 'models/reddit'
 num_sample = 500
 prime =  ' '
 
