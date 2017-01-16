@@ -182,10 +182,11 @@ Created realy dirty solution PHP based API for chatbot. Used filesystem files fo
 
 ### Setup
 
+- install **[expect](https://launchpad.net/ubuntu/+source/expect)**
 - install **[screen](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-screen-on-an-ubuntu-cloud-server)**
 - install **[PHP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04)**
 - chmod 777 **./storage** **./web** directories
-- add to [crontab](http://man7.org/linux/man-pages/man5/crontab.5.html) **[PROJECTPATH]/shell/cron** 
+- add to [crontab](http://man7.org/linux/man-pages/man5/crontab.5.html) **[PROJECTPATH]/shell/cron.sh** 
 - make as webroot  **[PROJECTPATH]/web** directory
 - create **.env** file and define there default used model with **DEFAULT_MODEL** param
 
@@ -195,6 +196,49 @@ Created realy dirty solution PHP based API for chatbot. Used filesystem files fo
 - do request GET/POST request with **IDENT** and **IN** with message to create message for processing. Without **IN** param it returns message. It returns timestamp to know when message file is updated , because it might not respond that fast (it depends on chatbot configurations and device power)
 
 If any question - feel free to ask at **dosjein[at]gmail[etc]** referencing to Ronalds Sovas or John Dosje 
+
+## Tips and Tricks [from karpathy](https://github.com/karpathy/char-rnn/blob/master/Readme.md#tips-and-tricks)
+
+### ToDo
+- need to add traning validator , that logs issues with Data size etc. Optional , but Nice2Have
+
+### Monitoring Validation Loss vs. Training Loss
+If you're somewhat new to Machine Learning or Neural Networks it can take a bit of expertise to get good models. The most important quantity to keep track of is the difference between your training loss (printed during training) and the validation loss (printed once in a while when the RNN is run on the validation data (by default every 1000 iterations)). In particular:
+
+- If your training loss is much lower than validation loss then this means the network might be **overfitting**. Solutions to this are to decrease your network size, or to increase dropout. For example you could try dropout of 0.5 and so on.
+- If your training/validation loss are about equal then your model is **underfitting**. Increase the size of your model (either number of layers or the raw number of neurons per layer)
+
+### Approximate number of parameters
+
+The two most important parameters that control the model are `rnn_size` and `num_layers`. I would advise that you always use `num_layers` of either 2/3. The `rnn_size` can be adjusted based on how much data you have. The two important quantities to keep track of here are:
+
+- The number of parameters in your model. This is printed when you start training.
+- The size of your dataset. 1MB file is approximately 1 million characters.
+
+These two should be about the same order of magnitude. It's a little tricky to tell. Here are some examples:
+
+- I have a 100MB dataset and I'm using the default parameter settings (which currently print 150K parameters). My data size is significantly larger (100 mil >> 0.15 mil), so I expect to heavily underfit. I am thinking I can comfortably afford to make `rnn_size` larger.
+- I have a 10MB dataset and running a 10 million parameter model. I'm slightly nervous and I'm carefully monitoring my validation loss. If it's larger than my training loss then I may want to try to increase dropout a bit and see if that heps the validation loss.
+
+### Best models strategy
+
+The winning strategy to obtaining very good models (if you have the compute time) is to always err on making the network larger (as large as you're willing to wait for it to compute) and then try different dropout values (between 0,1). Whatever model has the best validation performance (the loss, written in the checkpoint filename, low is good) is the one you should use in the end.
+
+It is very common in deep learning to run many different models with many different hyperparameter settings, and in the end take whatever checkpoint gave the best validation performance.
+
+By the way, the size of your training and validation splits are also parameters. Make sure you have a decent amount of data in your validation set or otherwise the validation performance will be noisy and not very informative.
+
+## Additional Pointers and Acknowledgements
+
+This code was originally based on Oxford University Machine Learning class [practical 6](https://github.com/oxford-cs-ml-2015/practical6), which is in turn based on [learning to execute](https://github.com/wojciechz/learning_to_execute) code from Wojciech Zaremba. Chunks of it were also developed in collaboration with my labmate [Justin Johnson](http://cs.stanford.edu/people/jcjohns/).
+
+To learn more about RNN language models I recommend looking at:
+
+- [My recent talk](https://skillsmatter.com/skillscasts/6611-visualizing-and-understanding-recurrent-networks) on char-rnn
+- [Generating Sequences With Recurrent Neural Networks](http://arxiv.org/abs/1308.0850) by Alex Graves
+- [Generating Text with Recurrent Neural Networks](http://www.cs.utoronto.ca/~ilya/pubs/2011/LANG-RNN.pdf) by Ilya Sutskever
+- [Tomas Mikolov's Thesis](http://www.fit.vutbr.cz/~imikolov/rnnlm/thesis.pdf)
+
 
 ## Thanks
 
