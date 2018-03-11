@@ -8,6 +8,17 @@ if (!is_array($_REQUEST) || count($_REQUEST) == 0){
     die ('send params [NEW] with variable of needed model (leave empty to use default). If you have bot - send IDENT to get responses ,or add IN param to send message <br/>More info <a href="https://github.com/dosjein/chatbot-rnn">dosjein/chatbot-rnn</a>');
 }
 
+if (isset($_REQUEST['MODELS'])){
+    $cdir = scandir('../models'); 
+    echo(json_encode(
+        array(
+            'models_list' => $cdir
+        )
+    )); 
+    die();
+}
+
+
 if (isset($_REQUEST['NEW'])){
 
     $workFile = rand();
