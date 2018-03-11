@@ -18,6 +18,31 @@ if (isset($_REQUEST['MODELS'])){
     die();
 }
 
+if (isset($_REQUEST['CLOSE'])){
+
+    $workFile = $_REQUEST['CLOSE'];
+
+    if (file_exists("../storage/php_request/".$workFile)) {
+
+        if (!file_exists('../storage/legacy_requests')) {
+            mkdir("../storage/legacy_requests", 0777);
+        }
+
+        rename(
+            "../storage/php_request/".$workFile, 
+            "../storage/legacy_requests".$workFile
+        );
+    }
+
+    echo(json_encode(
+        array(
+            'lecgacy_ident' => $workFile,
+
+        )
+    )); 
+    die();
+}
+
 
 if (isset($_REQUEST['NEW'])){
 
